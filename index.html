@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Свадебное приглашение</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-smoothing: antialiased;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      color: #4c3a36;
+      overflow-x: hidden;
+    }
+
+    .text {
+      text-align: center;
+      color: #7b5e57;
+      font-size: 1.18rem;
+      margin-bottom: 34px;
+      font-family: 'Georgia', serif;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      text-align: center;
+      font-family: 'Great Vibes', cursive;
+      color: #a1745c;
+      font-size: 2.3rem;
+      margin-bottom: 18px;
+      font-weight: normal;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+    }
+
+    .hero-photo {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-photo::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-photo img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      position: relative;
+      z-index: 0;
+    }
+
+    .card {
+      background: none;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+      text-align: left;
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      max-width: 100%;
+      min-height: 320px;
+    }
+
+    .card-content,
+    .card-illustration {
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 32px;
+    }
+
+    .card-illustration {
+      align-items: center;
+      justify-content: center;
+      background: none;
+    }
+
+    .card-illustration img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .vintage {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.3rem;
+      color: #a1745c;
+      text-align: center;
+      font-weight: normal;
+      margin-bottom: 18px;
+    }
+
+    .details,
+    .date {
+      text-align: left;
+    }
+
+    .details {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    .date {
+      margin: 15px 0;
+      font-size: 20px;
+      color: #7b5e57;
+    }
+
+    .section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    .section:not(:last-child):not(:first-child) {
+      padding-top: 30px;
+      padding-bottom: 0 !important;
+    }
+
+    .section:last-child {
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+
+    .hero-text {
+      position: absolute;
+      bottom: 40px;
+      right: 5vw;
+      left: 5vw;
+      top: auto;
+      transform: translateY(0) translateX(100%);
+      background: none;
+      color: #fff;
+      font-family: 'Georgia', serif;
+      font-size: 2.1rem;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+      z-index: 2;
+      opacity: 0;
+      transition: transform 1s cubic-bezier(.77, 0, .18, 1), opacity 1s cubic-bezier(.77, 0, .18, 1);
+      text-align: right;
+      max-width: 100vw;
+      min-width: 220px;
+      letter-spacing: 0.01em;
+      line-height: 1.3;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.25), 0 1px 0 #a1745c;
+    }
+
+
+
+    .section-three .section-body {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+
+    .section-three .section-body img {
+      filter: none;
+    }
+
+    .hero-text .hero-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.7rem;
+      color: #ffe3c2;
+      letter-spacing: 0.04em;
+      text-shadow: 0 2px 18px rgba(161, 116, 92, 0.25), 0 1px 0 #a1745c;
+      margin-top: 10px;
+      margin-bottom: 0;
+      display: inline-block;
+    }
+
+    .hero-text .hero-date {
+      color: #ffe3c2;
+      font-size: 1.2rem;
+      margin-bottom: 0;
+      margin-top: 8px;
+      display: inline-block;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-text .hero-place {
+      color: #fff8f0;
+      font-size: 1.1rem;
+      margin-top: 4px;
+      opacity: 0.85;
+      display: inline-block;
+    }
+
+    .dresscode-block {
+      flex: 1 1 320px;
+      min-width: 280px;
+      max-width: 400px;
+      background: none;
+      border-radius: 18px;
+      box-shadow: none;
+      padding: 28px 18px 32px 18px;
+    }
+
+    .slider {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 400px;
+      width: 100%;
+      max-width: 320px;
+      background: none;
+      overflow: hidden;
+      min-height: 400px;
+    }
+
+    .slider-img {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      aspect-ratio: 9/16;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(161, 116, 92, 0.10);
+      display: block;
+      background: #eee;
+      transition: opacity 0.3s;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      background: none !important;
+      color: #bdbdbd !important;
+      border-radius: 50% !important;
+      width: 28px !important;
+      height: 28px !important;
+      box-shadow: none !important;
+      opacity: 0.8;
+      transition: color 0.2s;
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+      margin-top: 0 !important;
+      min-width: 28px;
+      min-height: 28px;
+    }
+
+    .swiper-button-next:hover,
+    .swiper-button-prev:hover {
+      color: #a1745c !important;
+      background: none !important;
+    }
+
+    .swiper-button-next:after,
+    .swiper-button-prev:after {
+      font-size: 1.1rem !important;
+    }
+
+    .slider.swiper {
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .parallax-illustration-wrapper {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .section:nth-of-type(2) .parallax-illustration-wrapper img {
+      filter: blur(5px);
+    }
+
+    .timeline-section {
+      width: 100%;
+      background: #fff;
+      padding: 60px 0 40px 0;
+    }
+
+    .timeline-title {
+      text-align: center;
+      font-family: 'Great Vibes', cursive;
+      font-size: 38px;
+      color: #a1745c;
+      margin-bottom: 38px;
+      font-weight: 400;
+    }
+
+    .timeline-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      max-width: 540px;
+      width: 100%;
+    }
+
+    .timeline-item {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      position: relative;
+      min-height: 80px;
+    }
+
+    .timeline-dot {
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border: 3px solid #a1745c;
+      border-radius: 50%;
+      position: relative;
+      z-index: 2;
+      margin-top: 8px;
+      margin-right: 18px;
+      flex-shrink: 0;
+    }
+
+    .timeline-line {
+      width: 4px;
+      background: #a1745c22;
+      position: absolute;
+      left: 7px;
+      top: 26px;
+      bottom: -26px;
+      z-index: 1;
+      min-height: 40px;
+    }
+
+    .timeline-item:last-child .timeline-line {
+      display: none;
+    }
+
+    .timeline-content {
+      background: none;
+      padding: 12px 0 18px 0;
+      margin-left: 0;
+      min-width: 0;
+    }
+
+    .timeline-time {
+      font-size: 1.2rem;
+      color: #a1745c;
+      font-family: 'Georgia', serif;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .timeline-place {
+      font-size: 1.1rem;
+      color: #4c3a36;
+      margin-bottom: 2px;
+    }
+
+    .timeline-desc {
+      font-size: 1rem;
+      color: #7b5e57;
+      font-family: 'Georgia', serif;
+    }
+
+
+    /* Удалены все правила fade-in-left, fade-in-opacity, .animated, .visible, .hero-text-wedding.visible, .hero-text.visible */
+    @media (max-width: 1000px) {
+      .parallax-illustration-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .parallax-illustration {
+        width: 80vw;
+        min-width: 0;
+        max-width: 90vw;
+        position: static;
+        transform: none !important;
+        filter: none;
+      }
+    }
+
+    /* --- Responsive styles --- */
+    @media (max-width: 1000px) {
+      .container {
+        max-width: 100vw;
+        padding: 0 8px;
+      }
+
+      .card {
+        flex-direction: column;
+        min-height: unset;
+        box-shadow: none;
+        padding: 0;
+        background: none;
+      }
+
+      .card-content,
+      .card-illustration {
+        padding: 18px 8px 0 8px;
+        width: 100%;
+        min-width: 0;
+        max-width: 100vw;
+      }
+
+      .card-illustration {
+        order: 0;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 18px;
+        padding-bottom: 0;
+      }
+
+      .card-content {
+        order: 1;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding-top: 0;
+      }
+
+      .vintage,
+      .details,
+      .date {
+        text-align: left;
+        width: 100%;
+      }
+
+      .section:last-child {
+        padding-top: 32px;
+        padding-bottom: 32px;
+      }
+
+      .hero-photo,
+      .hero-photo img {
+        height: 100vh;
+        min-height: 320px;
+        max-height: 100vh;
+      }
+
+      .hero-text,
+      .hero-text-wedding {
+        font-size: 2.4rem;
+        left: 2vw;
+        right: 2vw;
+        bottom: 18px;
+        padding: 0 2vw;
+      }
+
+      .wedding-day-title {
+        font-size: 15vw;
+      }
+
+      .wedding-names {
+        font-size: 2.2rem;
+      }
+
+      .wedding-date {
+        font-size: 1.9rem;
+      }
+
+      .dresscode-block {
+        min-width: 0;
+        max-width: 100vw;
+        padding: 18px 4px 24px 4px;
+      }
+
+      .slider-img {
+        min-height: 320px;
+      }
+
+      .card-illustration {
+        position: relative;
+        z-index: 1;
+      }
+
+      .card-content {
+        position: relative;
+        z-index: 3;
+      }
+
+      .section:nth-of-type(2)>.container {
+        position: relative;
+        z-index: 1;
+      }
+
+      .section:nth-of-type(2) .card-content {
+        align-items: center;
+        text-align: center;
+      }
+
+      .section:nth-of-type(2) .vintage,
+      .section:nth-of-type(2) .details,
+      .section:nth-of-type(2) .date {
+        text-align: center;
+        width: 100%;
+      }
+
+      .section-three .section-body {
+        flex-direction: column;
+      }
+
+      .section:nth-of-type(2) .parallax-illustration-wrapper img {
+        filter: none;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .timeline-section {
+        padding: 32px 0 18px 0;
+      }
+
+      .timeline-title {
+        /* font-size: 1.4rem; */
+        margin-bottom: 22px;
+      }
+
+      .timeline {
+        max-width: 98vw;
+        padding: 0 2vw;
+      }
+
+      .timeline-dot {
+        width: 13px;
+        height: 13px;
+        margin-right: 10px;
+        margin-top: 7px;
+      }
+
+      .timeline-line {
+        left: 5.5px;
+        width: 2.5px;
+        top: 18px;
+        bottom: -18px;
+      }
+
+      .timeline-content {
+        padding: 7px 0 12px 0;
+      }
+
+      .timeline-time {
+        font-size: 1.05rem;
+      }
+
+      .timeline-place {
+        font-size: 0.98rem;
+      }
+
+      .timeline-desc {
+        font-size: 0.93rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="section">
+    <div class="hero-photo">
+      <img src="https://liamsmithphotography.com/wp-content/uploads/2023/04/fine-art-wedding-photography-5.jpg"
+        alt="Абстрактное свадебное фото в бежевом тоне" />
+      <div class="hero-text hero-text-wedding" data-aos="fade-left" data-aos-duration="2000">
+        <div class="wedding-day-title">Wedding day</div>
+        <div class="wedding-names">Ангелина & Данила</div>
+        <div class="wedding-date">1 октября 2025</div>
+      </div>
+    </div>
+  </section>
+  <section class="section section-three">
+    <div class="container" style="position:relative; min-height:340px;">
+      <div class="section-body">
+        <div class="parallax-illustration-wrapper">
+          <img
+            src="https://static.vecteezy.com/system/resources/thumbnails/047/496/996/small_2x/one-continuous-line-drawing-of-wedding-rings-romantic-elegance-concept-and-symbol-proposal-engagement-and-love-marriage-in-simple-linear-style-editable-stroke-vector.jpg"
+            alt="Иллюстрация колец" data-aos="fade" data-aos-duration="2000" />
+        </div>
+        <div class="card" style="position:relative; z-index:2; background:none;">
+          <div class="card-content text">
+            <h2 data-aos="fade-left">С любовью и нежностью</h2>
+            <p data-aos="fade-left">
+              Мы приглашаем вас разделить с нами самый важный день в нашей жизни — день нашей свадьбы!<br>
+              Этот день наполнен радостью, любовью и волшебством, и мы будем счастливы видеть вас рядом с нами в этот
+              особенный момент.<br>
+              1 октября 2025, 14:30<br>
+              Локация: Сад "Розовое Облако", Санкт-Петербург<br>
+              Ангелина & Данила<br>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <h2 data-aos="fade-left">Дресс-код: элегантная классика</h2>
+    <div class="text" data-aos="fade-left">
+      Мы будем рады видеть вас в&nbsp;<b style='color:#4c3a36;'>черно-белых</b> оттенках одежды.<br>Этот стиль
+      подчеркнет торжественность и гармонию нашего свадебного дня.
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:40px; justify-content:center;">
+      <div class="dresscode-block" data-aos="fade">
+        <h3>Для мужчин</h3>
+        <div class="slider swiper" id="slider-men">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="./static/photo_1_2025-06-25_22-39-11.jpg" alt="Мужской дресс-код 1"
+                class="slider-img" /></div>
+            <div class="swiper-slide"><img src="./static/photo_2_2025-06-25_22-39-11.jpg" alt="Мужской дресс-код 2"
+                class="slider-img" /></div>
+            <div class="swiper-slide"><img src="./static/photo_3_2025-06-25_22-39-11.jpg" alt="Мужской дресс-код 3"
+                class="slider-img" /></div>
+            <div class="swiper-slide"><img src="./static/photo_4_2025-06-25_22-39-11.jpg" alt="Мужской дресс-код 3"
+                class="slider-img" /></div>
+          </div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </div>
+      <div class="dresscode-block" data-aos="fade">
+        <h3>Для женщин</h3>
+        <div class="slider swiper" id="slider-women">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="./static/photo_1_2025-06-25_22-42-27.jpg" alt="Женский дресс-код 1"
+                class="slider-img" /></div>
+            <div class="swiper-slide"><img src="./static/photo_2_2025-06-25_22-42-27.jpg" alt="Женский дресс-код 2"
+                class="slider-img" /></div>
+            <div class="swiper-slide"><img src="./static/photo_3_2025-06-25_22-42-27.jpg" alt="Женский дресс-код 3"
+                class="slider-img" /></div>
+            <div class="swiper-slide"><img src="./static/photo_4_2025-06-25_22-42-27.jpg" alt="Женский дресс-код 3"
+                class="slider-img" /></div>
+          </div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section timeline-section">
+    <h2 data-aos="fade-left">Таймлайн дня</h2>
+    <div class="timeline-container">
+      <div class="timeline">
+        <div class="timeline-item" data-aos="fade-left">
+          <div class="timeline-dot"></div>
+          <div class="timeline-line"></div>
+          <div class="timeline-content">
+            <div class="timeline-time">14:30</div>
+            <div class="timeline-place">Сад "Розовое Облако"</div>
+            <div class="timeline-desc">Сбор гостей, welcome drink</div>
+          </div>
+        </div>
+        <div class="timeline-item" data-aos="fade-left">
+          <div class="timeline-dot"></div>
+          <div class="timeline-line"></div>
+          <div class="timeline-content">
+            <div class="timeline-time">15:00</div>
+            <div class="timeline-place">Церемония</div>
+            <div class="timeline-desc">Ведущая: Анна Смирнова</div>
+          </div>
+        </div>
+        <div class="timeline-item" data-aos="fade-left">
+          <div class="timeline-dot"></div>
+          <div class="timeline-line"></div>
+          <div class="timeline-content">
+            <div class="timeline-time">16:00</div>
+            <div class="timeline-place">Фотосессия</div>
+            <div class="timeline-desc">Фотограф: Игорь Лебедев</div>
+          </div>
+        </div>
+        <div class="timeline-item" data-aos="fade-left">
+          <div class="timeline-dot"></div>
+          <div class="timeline-line"></div>
+          <div class="timeline-content">
+            <div class="timeline-time">17:00</div>
+            <div class="timeline-place">Банкетный зал</div>
+            <div class="timeline-desc">Ведущий: Павел Котов, Музыка: DJ White</div>
+          </div>
+        </div>
+        <div class="timeline-item" data-aos="fade-left">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-time">22:00</div>
+            <div class="timeline-place">Завершение вечера</div>
+            <div class="timeline-desc">Трансфер для гостей</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ once: true, duration: 800, delay: 300 });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    new Swiper('#slider-men', {
+      navigation: {
+        nextEl: '#slider-men .swiper-button-next',
+        prevEl: '#slider-men .swiper-button-prev',
+      },
+      slidesPerView: 1,
+      spaceBetween: 0,
+      loop: true,
+      allowTouchMove: true,
+    });
+    new Swiper('#slider-women', {
+      navigation: {
+        nextEl: '#slider-women .swiper-button-next',
+        prevEl: '#slider-women .swiper-button-prev',
+      },
+      slidesPerView: 1,
+      spaceBetween: 0,
+      loop: true,
+      allowTouchMove: true,
+    });
+  </script>
+</body>
+
+</html>
